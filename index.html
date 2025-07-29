@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player🎵</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="player">
+        <div class="dashboard">
+            <div class="header">
+                <div class="menu">
+                    <button id="btn-menu"><i class="fa-solid fa-bars"></i></button>
+                    <div class="sub-menu"></div>
+                </div>
+                <div class="title-playing">
+                    <span>NOW PLAYING</span>
+                    <h1>That Girl</h1>
+                </div>
+                <div class="search-container">
+                    <button id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="cd">
+                <img src="./assets/imgs/Olly Murs - That Girl.jpg" alt="">
+            </div>
+            <div class="controls">
+            <button class="btn-control"><i class="fas fa-redo"></i></button>
+            <button class="btn-control"><i class="fas fa-step-backward"></i></button>
+            <button class="btn-control" id="play-btn"><i class="fas fa-play"></i></button>
+            <button class="btn-control"><i class="fas fa-step-forward"></i></button>
+            <button class="btn-control"><i class="fas fa-random"></i></button>
+            </div>
+            <div class="audio-section">
+                <audio id="audio" src="./assets/audios/Fall Out Boy - Centuries (Lyrics).mp3"></audio>
+            </div>
+        </div>
+        <div class="playlist">
+            <div class="song">
+                <div class="thumb">
+                    <img src="./assets/imgs/Fall Out Boy - Centuries.jpg" alt="">
+                </div>
+                <div class="body-song">
+                    <p class="name">Fall Out Boy</p>
+                    <p class="singer">Centuries</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                </div>
+            </div>
+            <div class="song">
+                <div class="thumb">
+                    <img src="./assets/imgs/Olly Murs - That Girl.jpg" alt="">
+                </div>
+                <div class="body-song">
+                    <p class="name">That Girl</p>
+                    <p class="singer">Olly Murs</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                </div>
+            </div>
+            <div class="song">
+                <div class="thumb">
+                    <img src="./assets/imgs/Olly Murs - That Girl.jpg" alt="">
+                </div>
+                <div class="body-song">
+                    <p class="name">That Girl</p>
+                    <p class="singer">Olly Murs</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                </div>
+            </div>
+            <div class="song">
+                <div class="thumb">
+                    <img src="./assets/imgs/Olly Murs - That Girl.jpg" alt="">
+                </div>
+                <div class="body-song">
+                    <p class="name">That Girl</p>
+                    <p class="singer">Olly Murs</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                </div>
+            </div>
+            <div class="song">
+                <div class="thumb">
+                    <img src="./assets/imgs/Olly Murs - That Girl.jpg" alt="">
+                </div>
+                <div class="body-song">
+                    <p class="name">That Girl</p>
+                    <p class="singer">Olly Murs</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                </div>
+            </div>
+            <div class="song">
+                <div class="thumb">
+                    <img src="./assets/imgs/Olly Murs - That Girl.jpg" alt="">
+                </div>
+                <div class="body-song">
+                    <p class="name">That Girl</p>
+                    <p class="singer">Olly Murs</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>

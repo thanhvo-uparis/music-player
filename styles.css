@@ -91,6 +91,18 @@ body {
     background-color: #ff5f93;
 }
 
+/* rang */
+.audio-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-section #range {
+    width: 90%;
+}
+
 /* playlist, song */
 .playlist {
     max-height: 266px;
@@ -102,14 +114,19 @@ body {
 }
 
 .song {
-    width: 480px;
-    padding: 6px;
+    width: 471px;
+    height: 67px;
+    padding: 23px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-radius: 14px;
     background-color: #ccc;
+}
+
+.song.active {
+    background-color: #eeb5c7;
 }
 
 .song:hover {
@@ -127,12 +144,3 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
-
-.body-song {
-    
-}
-
-.option {
-
-}
-

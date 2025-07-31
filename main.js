@@ -1,5 +1,11 @@
 const playList = document.querySelector(".playlist");
 const titlePlaying = document.querySelector(".title-playing");
+//handle music: play/pause, next, prev
+const btnHandlePlay = document.querySelector("#btn-handlePlay");
+const audio = document.querySelector("#audio");
+const nextSong = document.querySelector("#next-song");
+
+let isPlaying = false;
 let idSongCurrent = 0;
 
 const player = {
@@ -20,24 +26,24 @@ const player = {
         },
         {
             id: 3,
-            title: "That Girl",
-            singer: "Olly Murs",
+            title: "Until You",
+            singer: "Shayne Ward",
             img: "./assets/imgs/That Girl.jpg",
-            path: "./assets/audios/That Girl - Olly Murs (Lyric Video).mp3"
+            path: "./assets/audios/Shayne Ward - Until You (Lyrics).mp3"
         },
         {
             id: 4,
-            title: "Song 4",
-            singer: "Olly Murs",
+            title: "Apologize",
+            singer: "Timbaland",
             img: "./assets/imgs/That Girl.jpg",
-            path: "./assets/audios/That Girl - Olly Murs (Lyric Video).mp3"
+            path: "./assets/audios/Timbaland - Apologize ft. OneRepublic.mp3"
         },
         {
             id: 5,
-            title: "Song 5",
-            singer: "Olly Murs",
+            title: "See You Again",
+            singer: "Wiz Khalifa ft. Charlie Puth",
             img: "./assets/imgs/That Girl.jpg",
-            path: "./assets/audios/That Girl - Olly Murs (Lyric Video).mp3"
+            path: "./assets/audios/Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack.mp3"
         },
     ],
     renderSong: function() {
@@ -53,7 +59,7 @@ const player = {
                             <p class="singer">${song.singer}</p>
                         </div>
                         <div class="option">
-                            <i class="fa-solid fa-heart" style="color: #ff427b;"></i>
+                            <i class="fa-solid fa-heart" style="color: #e1e2e5;"></i>
                         </div>
                     </div>
                 `
@@ -67,26 +73,62 @@ const player = {
 
         titleSong.textContent = this.songs[index]["title"];
         cdThumb.setAttribute("src", this.songs[index]["img"])
+        document.querySelector(".song").classList.add("active");
+    },
+    updateSongCurrent: function() {
+        //upload src file audio
+        audio.setAttribute("src", this.songs[idSongCurrent]["path"]);
+    },
+    playAudio: function() {
+        this.updateSongCurrent(idSongCurrent);
+        audio.play();
+    },
+    togglePlay: function() {
+        //verifie si musique est en pause
+        if (audio.paused) {
+            btnHandlePlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+            this.playAudio();
+        }
+        else {
+            btnHandlePlay.innerHTML = `<i class="fa-solid fa-play"></i>`;
+            audio.pause();
+        }
+    },
+    handleEvents: function() {
+        btnHandlePlay.addEventListener("click", () => {
+            this.togglePlay();
+        });
+
+        nextSong.addEventListener("click", () => {
+            console.log("da nhan vao next");
+            ++idSongCurrent;
+            this.playAudio();
+        })
     },
     selectedSong: function() {
         playList.addEventListener("click", (event) => {
             const songClicked = event.target.closest(".song");
-
             if (songClicked) {
+
                 idSongCurrent = songClicked.getAttribute("data-index");
                 this.updateTitle(idSongCurrent);
+                this.updateSongCurrent(); //update src of song
 
                 const listSongs = document.querySelectorAll(".song");
                 listSongs.forEach(song => {
                     song.classList.remove("active");
                 })
                 songClicked.classList.add("active");
+                btnHandlePlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                audio.play();
+                togglePlay();
             }
         })
     },
     start: function() {
         this.renderSong();
         this.selectedSong();
+        this.handleEvents();
     }
 }
 

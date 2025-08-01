@@ -4,6 +4,7 @@ const titlePlaying = document.querySelector(".title-playing");
 const btnHandlePlay = document.querySelector("#btn-handlePlay");
 const audio = document.querySelector("#audio");
 const nextSong = document.querySelector("#next-song");
+const prevSong = document.querySelector("#prev-song");
 
 let isPlaying = false;
 let idSongCurrent = 0;
@@ -78,9 +79,14 @@ const player = {
     updateSongCurrent: function() {
         //upload src file audio
         audio.setAttribute("src", this.songs[idSongCurrent]["path"]);
-    },
+        const listSongs = document.querySelectorAll(".song");
+        listSongs.forEach(song => {
+            song.classList.remove("active");
+        })
+        listSongs[idSongCurrent].className += " active";
+},
     playAudio: function() {
-        this.updateSongCurrent(idSongCurrent);
+        this.updateSongCurrent();
         audio.play();
     },
     togglePlay: function() {
@@ -94,34 +100,49 @@ const player = {
             audio.pause();
         }
     },
+    handleNext: function() {
+       nextSong.addEventListener("click", () => {
+            idSongCurrent = (idSongCurrent + 1) % this.songs.length;
+            if (!audio.paused) {
+                this.playAudio();
+            } else {
+                this.updateSongCurrent();
+            }
+            console.log(`khi bam next: ${idSongCurrent}`);
+        }) 
+    },
+    handlePrev: function() {
+       prevSong.addEventListener("click", () => {
+            idSongCurrent = (idSongCurrent + this.songs.length - 1) % this.songs.length;
+            if (!audio.paused) {
+                this.playAudio();
+            } else {
+                this.updateSongCurrent();
+            }
+            console.log(`khi bam prev: ${idSongCurrent}`);
+        }) 
+    },
     handleEvents: function() {
         btnHandlePlay.addEventListener("click", () => {
             this.togglePlay();
         });
 
-        nextSong.addEventListener("click", () => {
-            console.log("da nhan vao next");
-            ++idSongCurrent;
-            this.playAudio();
-        })
+        this.handleNext();
+        this.handlePrev();
     },
     selectedSong: function() {
         playList.addEventListener("click", (event) => {
             const songClicked = event.target.closest(".song");
             if (songClicked) {
-
-                idSongCurrent = songClicked.getAttribute("data-index");
+                
+                idSongCurrent = parseInt(songClicked.getAttribute("data-index"));
+                console.log(`khi bam chon bai: ${idSongCurrent}`);
+            
                 this.updateTitle(idSongCurrent);
                 this.updateSongCurrent(); //update src of song
 
-                const listSongs = document.querySelectorAll(".song");
-                listSongs.forEach(song => {
-                    song.classList.remove("active");
-                })
-                songClicked.classList.add("active");
                 btnHandlePlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
                 audio.play();
-                togglePlay();
             }
         })
     },

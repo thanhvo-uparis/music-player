@@ -91,16 +91,26 @@ body {
     background-color: #ff5f93;
 }
 
-/* rang */
+/* progress */
 .audio-section {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+    color: #fff;
 }
 
-.audio-section #range {
+.audio-section #progress {
     width: 90%;
+    accent-color: #ff5f93;
+}
+
+.audio-section #current-time,
+.audio-section #duration {
+    font-size: 14px;
+    width: 40px;
+    text-align: center;
 }
 
 /* playlist, song */
@@ -144,3 +154,9 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
+
+/* #btn-repeat.active,
+#btn-shuffle.active {
+    color: #ee2b69;
+    background-color: #eeb5c7;
+} */

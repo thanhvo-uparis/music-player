@@ -1,10 +1,14 @@
 const playList = document.querySelector(".playlist");
 const titlePlaying = document.querySelector(".title-playing");
+const progress = document.querySelector("#progress");
 //handle music: play/pause, next, prev
 const btnHandlePlay = document.querySelector("#btn-handlePlay");
 const audio = document.querySelector("#audio");
 const nextSong = document.querySelector("#next-song");
 const prevSong = document.querySelector("#prev-song");
+//repeat and shuffle
+// const repeatSong = document.querySelector("#btn-repeat");
+// const shuffleSong = document.querySelector("#btn-shuffle");
 
 let isPlaying = false;
 let idSongCurrent = 0;
@@ -108,7 +112,6 @@ const player = {
             } else {
                 this.updateSongCurrent();
             }
-            console.log(`khi bam next: ${idSongCurrent}`);
         }) 
     },
     handlePrev: function() {
@@ -119,9 +122,30 @@ const player = {
             } else {
                 this.updateSongCurrent();
             }
-            console.log(`khi bam prev: ${idSongCurrent}`);
         }) 
     },
+    updateProgress: function() {
+        audio.addEventListener("timeupdate", () => {
+            if (audio.duration) {
+                const percentValue = audio.currentTime / audio.duration * 100;
+                progress.value =percentValue;
+            }
+        })
+    },
+    seekAudio: function() {
+        progress.addEventListener("change", (event) => {
+            const seekTime = (event.target.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        })
+    },
+    // handleRepeat: function() {
+    //     repeatSong.addEventListener("click", () => {
+    //         repeatSong.classList.add("active");
+    //         audio.onended = function() {
+    //             audio.play();
+    //         }
+    //     })
+    // },
     handleEvents: function() {
         btnHandlePlay.addEventListener("click", () => {
             this.togglePlay();
@@ -129,6 +153,8 @@ const player = {
 
         this.handleNext();
         this.handlePrev();
+        this.updateProgress();
+        this.seekAudio();
     },
     selectedSong: function() {
         playList.addEventListener("click", (event) => {
@@ -136,7 +162,6 @@ const player = {
             if (songClicked) {
                 
                 idSongCurrent = parseInt(songClicked.getAttribute("data-index"));
-                console.log(`khi bam chon bai: ${idSongCurrent}`);
             
                 this.updateTitle(idSongCurrent);
                 this.updateSongCurrent(); //update src of song

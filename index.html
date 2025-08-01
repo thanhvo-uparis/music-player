@@ -27,15 +27,18 @@
                 <img id="cd-thumb" src="" alt="">
             </div>
             <div class="controls">
-            <button class="btn-control"><i class="fas fa-redo"></i></button>
+            <button class="btn-control" id="btn-repeat"><i class="fas fa-redo"></i></button>
             <button class="btn-control" id="prev-song"><i class="fas fa-step-backward"></i></button>
             <button class="btn-control" id="btn-handlePlay"><i class="fa-solid fa-play"></i></button>
             <button class="btn-control" id="next-song"><i class="fas fa-step-forward"></i></button>
-            <button class="btn-control" ><i class="fas fa-random"></i></button>
+            <button class="btn-control" id="btn-shuffle"><i class="fas fa-random"></i></button>
             </div>
             <div class="audio-section">
-                <input id="range" type="range" min="1" max="100">
+                <span id="current-time">0:00</span>
+                <input id="progress" type="range" value="0" min="0" max="100">
+                <span id="duration">0:00</span>
                 <audio id="audio"></audio>
+
             </div>
         </div>
         <div class="playlist">

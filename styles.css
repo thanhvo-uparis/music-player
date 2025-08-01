@@ -155,8 +155,8 @@ body {
     object-fit: cover;
 }
 
-/* #btn-repeat.active,
+#btn-repeat.active,
 #btn-shuffle.active {
     color: #ee2b69;
     background-color: #eeb5c7;
-} */
+}

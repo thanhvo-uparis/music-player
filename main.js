@@ -7,11 +7,12 @@ const audio = document.querySelector("#audio");
 const nextSong = document.querySelector("#next-song");
 const prevSong = document.querySelector("#prev-song");
 //repeat and shuffle
-// const repeatSong = document.querySelector("#btn-repeat");
-// const shuffleSong = document.querySelector("#btn-shuffle");
+const btnRepeaat = document.querySelector("#btn-repeat");
+const btnShuffle = document.querySelector("#btn-shuffle");
 
 let isPlaying = false;
 let idSongCurrent = 0;
+let isShuffle = false;
 
 const player = {
     songs:  [
@@ -106,7 +107,12 @@ const player = {
     },
     handleNext: function() {
        nextSong.addEventListener("click", () => {
-            idSongCurrent = (idSongCurrent + 1) % this.songs.length;
+            if (isShuffle) {
+                idSongCurrent = this.getRandomSongIndex();
+            } else {
+                idSongCurrent = (idSongCurrent + 1) % this.songs.length;
+            }
+            
             if (!audio.paused) {
                 this.playAudio();
             } else {
@@ -116,7 +122,11 @@ const player = {
     },
     handlePrev: function() {
        prevSong.addEventListener("click", () => {
-            idSongCurrent = (idSongCurrent + this.songs.length - 1) % this.songs.length;
+            if (isShuffle) {
+                idSongCurrent = this.getRandomSongIndex();
+            } else {
+                idSongCurrent = (idSongCurrent + this.songs.length - 1) % this.songs.length;
+            }
             if (!audio.paused) {
                 this.playAudio();
             } else {
@@ -138,14 +148,27 @@ const player = {
             audio.currentTime = seekTime;
         })
     },
-    // handleRepeat: function() {
-    //     repeatSong.addEventListener("click", () => {
-    //         repeatSong.classList.add("active");
-    //         audio.onended = function() {
-    //             audio.play();
-    //         }
-    //     })
-    // },
+    handleRepeat: function() {
+        btnRepeaat.addEventListener("click", () => {
+            btnRepeaat.classList.toggle("active");
+            audio.onended = function() {
+                audio.play();
+            }
+        })
+    },
+    getRandomSongIndex: function() {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * this.songs.length);
+        } while (randomIndex === idSongCurrent);
+        return randomIndex;
+    },
+    handleShuffle: function() {
+        btnShuffle.addEventListener("click", () => {
+            isShuffle = !isShuffle;
+            btnShuffle.classList.toggle("active", isShuffle);
+        })
+    },
     handleEvents: function() {
         btnHandlePlay.addEventListener("click", () => {
             this.togglePlay();
@@ -153,6 +176,8 @@ const player = {
 
         this.handleNext();
         this.handlePrev();
+        this.handleRepeat();
+        this.handleShuffle();
         this.updateProgress();
         this.seekAudio();
     },
